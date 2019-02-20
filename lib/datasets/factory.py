@@ -64,7 +64,7 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
 for split in ['trainval', 'test']:
   name = 'icub_world_trainval'
   name = 'icub_world_{}'.format(split)
-  __sets[name] = (lambda split='trainval', year='2007': icub_world(split, '2007'))
+  __sets[name] = (lambda split=split, year='2018': icub_world(split, '2007'))
 
 def get_imdb(name):
   """Get an imdb (image database) by name."""
