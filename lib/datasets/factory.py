@@ -61,8 +61,10 @@ for split in ['train', 'val', 'val1', 'val2', 'test']:
     __sets[name] = (lambda split=split, devkit_path=devkit_path, data_path=data_path: imagenet(split,devkit_path,data_path))
 
 # set up icub worl transformations
-name = 'icub_world_trainval'
-__sets[name] = (lambda split='trainval', year='2007': pascal_voc('trainval', '2007'))
+for split in ['trainval', 'test']:
+  name = 'icub_world_trainval'
+  name = 'icub_world_{}'.format(split)
+  __sets[name] = (lambda split='trainval', year='2007': icub_world(split, '2007'))
 
 def get_imdb(name):
   """Get an imdb (image database) by name."""
