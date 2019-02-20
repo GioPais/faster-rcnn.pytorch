@@ -44,9 +44,12 @@ class icub_world(imdb):
         self._image_set = image_set
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
-        self._data_path = os.path.join(self._devkit_path, 'icub1')
+        self._data_path = os.path.join(self._devkit_path, 'icub_manual')
         self._classes = ('__background__',  # always index 0
-                         'bodylotion8')
+                         'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
+                         'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
+                         'mug1', 'glass8', 'bodylotion8', 'book6', 'cellphone1',
+                         'mouse9', 'pencilcase5', 'wallet6', 'sprayer6', 'squeezer5')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._image_ext = '.jpg'
         self._image_index = self._load_image_set_index()
