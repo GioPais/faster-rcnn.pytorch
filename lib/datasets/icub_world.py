@@ -45,11 +45,16 @@ class icub_world(imdb):
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
         self._data_path = os.path.join(self._devkit_path, 'icub_world_manual')
+        #self._classes = ('__background__',  # always index 0
+        #                 'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
+        #                 'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
+        #                 'mug1', 'glass8', 'bodylotion8', 'book6', 'cellphone1',
+        #                 'mouse9', 'pencilcase5', 'wallet6', 'sprayer6', 'squeezer5')
         self._classes = ('__background__',  # always index 0
-                         'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
-                         'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
-                         'mug1', 'glass8', 'bodylotion8', 'book6', 'cellphone1',
-                         'mouse9', 'pencilcase5', 'wallet6', 'sprayer6', 'squeezer5')
+                         'ringbinder', 'flower', 'perfume', 'hairclip', 'hairbrush',
+                         'sunglasses', 'sodabottle', 'soapdispenser', 'ovenglove', 'remote',
+                         'mug', 'glass', 'bodylotion', 'book', 'cellphone',
+                         'mouse', 'pencilcase', 'wallet', 'sprayer', 'squeezer')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))
         self._image_ext = '.jpg'
         self._image_index = self._load_image_set_index()
@@ -239,7 +244,10 @@ class icub_world(imdb):
             difficult = 0 if diffc == None else int(diffc.text)
             ishards[ix] = difficult
 
-            cls = self._class_to_ind[obj.find('name').text.lower().strip()]
+            cls_raw = obj.find('name').text.lower().strip()
+            cls = self._class_to_ind[cls_raw[:-1]]
+            #cls_raw = self._class_to_ind[obj.find('name').text.lower().strip()]
+            #cls=cls_raw[:-1]
             boxes[ix, :] = [x1, y1, x2, y2]
             gt_classes[ix] = cls
             overlaps[ix, cls] = 1.0
