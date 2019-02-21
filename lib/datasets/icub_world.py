@@ -44,7 +44,7 @@ class icub_world(imdb):
         self._image_set = image_set
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
-        self._data_path = os.path.join(self._devkit_path, 'icub_manual')
+        self._data_path = os.path.join(self._devkit_path, 'icub_world_manual')
         self._classes = ('__background__',  # always index 0
                          'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
                          'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
@@ -112,7 +112,7 @@ class icub_world(imdb):
         """
         Return the default path where PASCAL VOC is expected to be installed.
         """
-        return os.path.join(cfg.DATA_DIR, 'VOCtest')
+        return os.path.join(cfg.DATA_DIR, 'faster_datasets')
 
     def gt_roidb(self):
         """
