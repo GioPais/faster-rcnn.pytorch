@@ -44,7 +44,7 @@ class icub_world(imdb):
         self._image_set = image_set
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
-        self._data_path = os.path.join(self._devkit_path, 'icub_world_manual')
+        self._data_path = os.path.join(self._devkit_path, 'icub_world_crop')
         #self._classes = ('__background__',  # always index 0
         #                 'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
         #                 'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
@@ -245,7 +245,12 @@ class icub_world(imdb):
             ishards[ix] = difficult
 
             cls_raw = obj.find('name').text.lower().strip()
-            cls = self._class_to_ind[cls_raw[:-1]]
+            cls2=cls_raw[:-1]
+            if cls2.endswith('1'):
+            	cls3=cls2[:-1]
+            else:
+            	cls3=cls2
+            cls = self._class_to_ind[cls3]
             #cls_raw = self._class_to_ind[obj.find('name').text.lower().strip()]
             #cls=cls_raw[:-1]
             boxes[ix, :] = [x1, y1, x2, y2]

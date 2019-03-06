@@ -177,7 +177,7 @@ if __name__ == '__main__':
   elif args.dataset == "icub_world":
       args.imdb_name = "icub_world_trainval"
       args.imdbval_name = "icub_world_test"
-      args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '20']
+      args.set_cfgs = ['ANCHOR_SCALES', '[8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '30']
 
   args.cfg_file = "cfgs/{}_ls.yml".format(args.net) if args.large_scale else "cfgs/{}.yml".format(args.net)
 
@@ -371,6 +371,19 @@ if __name__ == '__main__':
 
         loss_temp = 0
         start = time.time()
+
+      if step % 500 == 0:
+        save_name = os.path.join(output_dir, 'faster_rcnn_{}_{}_{}.pth'.format(args.session, epoch, step))
+        save_checkpoint({
+          'session': args.session,
+          'epoch': epoch + 1,
+          'model': fasterRCNN.module.state_dict() if args.mGPUs else fasterRCNN.state_dict(),
+          'optimizer': optimizer.state_dict(),
+          'pooling_mode': cfg.POOLING_MODE,
+          'class_agnostic': args.class_agnostic,
+        }, save_name)
+        print('save model: {}'.format(save_name))
+
 
     
     save_name = os.path.join(output_dir, 'faster_rcnn_{}_{}_{}.pth'.format(args.session, epoch, step))

@@ -165,10 +165,10 @@ if __name__ == '__main__':
     'faster_rcnn_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
 
   pascal_classes = np.asarray(['__background__',  # always index 0
-                         'ringbinder4', 'flower7', 'perfume1', 'hairclip2', 'hairbrush3',
-                         'sunglasses7', 'sodabottle2', 'soapdispenser5', 'ovenglove7', 'remote7',
-                         'mug1', 'glass8', 'bodylotion8', 'book6', 'cellphone1',
-                         'mouse9', 'pencilcase5', 'wallet6', 'sprayer6', 'squeezer5'])
+                         'ringbinder', 'flower', 'perfume', 'hairclip', 'hairbrush',
+                         'sunglasses', 'sodabottle', 'soapdispense5', 'ovenglove', 'remote',
+                         'mug', 'glass', 'bodylotion', 'book', 'cellphone',
+                         'mouse', 'pencilcase', 'wallet', 'sprayer', 'squeezer'])
 
   # initilize the network here.
   if args.net == 'vgg16':
